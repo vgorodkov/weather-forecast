@@ -25,7 +25,7 @@ export const GraphCanvas = ({ weatherData }: { weatherData: CustomWeatherData })
         <SKText
           font={dateFont}
           key={index}
-          x={index * ((width - spacing.dafault) / graph.timeFrames)}
+          x={index * ((width - spacing.default) / graph.timeFrames)}
           y={canvasHeight - spacing.small / 2}
           text={parseDate(date)}
         />

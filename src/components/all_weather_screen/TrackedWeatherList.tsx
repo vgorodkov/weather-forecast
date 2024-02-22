@@ -26,6 +26,6 @@ export const TrackedWeatherList = () => {
 
 const styles = StyleSheet.create({
   listContent: {
-    gap: spacing.dafault,
+    gap: spacing.default,
   },
 });

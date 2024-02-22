@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   appNameContainer: {
-    paddingTop: spacing.dafault,
+    paddingTop: spacing.default,
   },
 });

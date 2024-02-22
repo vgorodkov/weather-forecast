@@ -34,7 +34,7 @@ export const DetailedWeatherScreen = ({ route, navigation }: DetailedWeatherScre
 
   return (
     <GradientWrapper>
-      <View style={[styles.container, { paddingTop: insets.top + spacing.dafault }]}>
+      <View style={[styles.container, { paddingTop: insets.top + spacing.default }]}>
         <Header cityName={weatherData.cityName} onBackBtnPress={onBackBtnPress} />
         <View style={styles.currentTemp}>
           <Text variant={FontVariant.sub_heading}>{convertToCelsius(currentWeatherData.temp)}</Text>
@@ -59,14 +59,14 @@ export const DetailedWeatherScreen = ({ route, navigation }: DetailedWeatherScre
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: spacing.dafault,
-    paddingHorizontal: spacing.dafault,
+    paddingBottom: spacing.default,
+    paddingHorizontal: spacing.default,
     gap: spacing.medium,
   },
 
   forecastInfoContainer: {
     flexWrap: 'wrap',
-    gap: spacing.dafault,
+    gap: spacing.default,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

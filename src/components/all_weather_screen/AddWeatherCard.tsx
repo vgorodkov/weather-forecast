@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: spacing.dafault,
+    padding: spacing.default,
     borderRadius: 24,
     maxWidth: CARD_SIZE,
   },

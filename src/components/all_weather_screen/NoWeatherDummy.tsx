@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: spacing.dafault,
-    paddingHorizontal: spacing.dafault,
+    gap: spacing.default,
+    paddingHorizontal: spacing.default,
   },
   noWeatherDummyText: {
     textAlign: 'center',
