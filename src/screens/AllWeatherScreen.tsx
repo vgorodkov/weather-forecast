@@ -7,12 +7,13 @@ import { spacing } from '@constants/layout';
 import { FontVariant } from '@constants/font';
 import { GradientWrapper } from '@components/GradientWrapper';
 import { Text } from '@components/common/Text';
-import { TrackedWeatherList } from '@components/all_weather_screen/TrackedWeatherList';
 import { Button } from '@components/common/Button';
-import { NoWeatherDummy } from '@components/detailed_weather_screen/NoWeatherDummy';
 import { QRScanner } from '@components/QRScanner';
+import { TrackedWeatherList, NoWeatherDummy } from '@components/all_weather_screen';
 
 const ASK_PERMISSION_TEXT = 'We need your permission to show the camera';
+const BTN_PERSMISSION_TEXT = 'Grant permission';
+const BTN_ADD_WEATHER_TEXT = 'Add weather';
 
 export const AllWeatherScreen = () => {
   const trackedWeather = useSelector((state: RootState) => state.weather.trackedWeather);
@@ -20,7 +21,6 @@ export const AllWeatherScreen = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
 
   const isWeatherDummyShown = trackedWeather.length <= 0 && !isCameraOpen;
-  const iwWeatherListShow = !isCameraOpen && !isWeatherDummyShown;
 
   const openCamera = () => {
     setIsCameraOpen(true);
@@ -32,31 +32,45 @@ export const AllWeatherScreen = () => {
 
   if (!permission) {
     // Camera permissions are still loading
-    return <View />;
+    return (
+      <GradientWrapper>
+        <View />
+      </GradientWrapper>
+    );
   }
 
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <View style={styles.permissionContainer}>
-        <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
-          {ASK_PERMISSION_TEXT}
-        </Text>
-        <Button onPress={requestPermission} label="grant permission" />
-      </View>
+      <GradientWrapper>
+        <View style={styles.permissionContainer}>
+          <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
+            {ASK_PERMISSION_TEXT}
+          </Text>
+          <Button onPress={requestPermission} label={BTN_PERSMISSION_TEXT} />
+        </View>
+      </GradientWrapper>
     );
+  }
+
+  if (isWeatherDummyShown) {
+    return (
+      <GradientWrapper>
+        <NoWeatherDummy openCamera={openCamera} />
+      </GradientWrapper>
+    );
+  }
+
+  if (isCameraOpen) {
+    return <QRScanner closeCamera={closeCamera} />;
   }
 
   return (
     <GradientWrapper>
-      {isWeatherDummyShown && <NoWeatherDummy openCamera={openCamera} />}
-      {isCameraOpen && <QRScanner closeCamera={closeCamera} />}
-      {iwWeatherListShow && (
-        <View style={styles.allWeatherContainer}>
-          <TrackedWeatherList />
-          <Button label="Add Weather" onPress={openCamera} />
-        </View>
-      )}
+      <View style={styles.allWeatherContainer}>
+        <TrackedWeatherList />
+        <Button label={BTN_ADD_WEATHER_TEXT} onPress={openCamera} />
+      </View>
     </GradientWrapper>
   );
 };
