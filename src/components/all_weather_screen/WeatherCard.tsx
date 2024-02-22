@@ -1,15 +1,9 @@
-import { Pressable, StyleSheet, View, Image, Dimensions, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
-import Animated, {
-  SharedValue,
-  useAnimatedStyle,
-  useDerivedValue,
-  withSpring,
-} from 'react-native-reanimated';
+import { Pressable, StyleSheet, View } from 'react-native';
+import React from 'react';
 
-import { Text } from '../common/Text';
+import { Text } from '@components/common/Text';
 import { useGetWeatherByLatLonQuery } from '@redux/api/weatherApi';
-import { CustomWeatherData, TrackedWeather, WeatherResponse } from '@customTypes/weather';
+import { TrackedWeather } from '@customTypes/weather';
 import { FontVariant } from '@constants/font';
 import { convertToCelsius } from 'utils/convertToCelsius';
 
@@ -19,6 +13,7 @@ import { MainStackParamList, Route } from '@customTypes/navigation';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Label } from '@components/common/Label';
 import { mapWeatherData } from 'utils/mapWeatherData';
+import { colors } from '@constants/colors';
 
 interface WeatherCardProps {
   item: TrackedWeather;
@@ -26,16 +21,25 @@ interface WeatherCardProps {
 
 type AllWeatherScreenProp = NativeStackScreenProps<MainStackParamList, Route.AllWeather>;
 
+const WeatherCardSkeleton = () => {
+  return (
+    <View
+      style={{
+        height: 120,
+        width: '100%',
+        backgroundColor: colors.light_blue,
+        borderRadius: 8,
+      }}
+    />
+  );
+};
+
 export const WeatherCard = ({ item }: WeatherCardProps) => {
   const { data, isLoading } = useGetWeatherByLatLonQuery({ lat: item.lat, lon: item.lon });
   const navigation = useNavigation<AllWeatherScreenProp['navigation']>();
 
   if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size={'large'} />
-      </View>
-    );
+    return <WeatherCardSkeleton />;
   }
 
   if (!data) {
@@ -51,7 +55,7 @@ export const WeatherCard = ({ item }: WeatherCardProps) => {
   };
 
   return (
-    <Animated.View>
+    <View>
       <Pressable onPress={onWeatherCard} style={styles.card}>
         <View style={styles.mainInfoContainer}>
           <Text variant={FontVariant.sub_heading}>{data.city.name}</Text>
@@ -62,20 +66,20 @@ export const WeatherCard = ({ item }: WeatherCardProps) => {
             <Label
               text={desc.description}
               key={index}
-              backgroundColor={'#D86191'}
+              backgroundColor={colors.pink}
               textColor="white"
             />
           ))}
         </View>
       </Pressable>
-    </Animated.View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#658ED930',
-    padding: spacing.dafault,
+    backgroundColor: colors.light_blue,
+    padding: spacing.default,
     borderRadius: 8,
     gap: spacing.small,
   },
