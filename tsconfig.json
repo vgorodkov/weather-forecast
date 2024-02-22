@@ -10,7 +10,8 @@
       "@constants/*": ["constants/*"],
       "@navigation/*": ["navigation/*"],
       "@redux/*": ["redux/*"],
-      "@customTypes/*": ["types/*"]
+      "@customTypes/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }
