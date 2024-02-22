@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { Camera } from 'expo-camera';
 import { useSelector } from 'react-redux';
@@ -35,7 +35,13 @@ export const AllWeatherScreen = () => {
 
   if (!permission) {
     // Camera permissions are still loading
-    return <View />;
+    return (
+      <GradientWrapper>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size={'large'} />
+        </View>
+      </GradientWrapper>
+    );
   }
 
   if (!permission.granted) {
@@ -70,8 +76,8 @@ export const AllWeatherScreen = () => {
         style={[
           styles.allWeatherContainer,
           {
-            paddingTop: insets.top + spacing.dafault,
-            paddingBottom: insets.bottom + spacing.dafault,
+            paddingTop: insets.top + spacing.default,
+            paddingBottom: insets.bottom + spacing.default,
           },
         ]}
       >
@@ -85,14 +91,14 @@ export const AllWeatherScreen = () => {
 const styles = StyleSheet.create({
   allWeatherContainer: {
     paddingVertical: spacing.medium,
-    paddingHorizontal: spacing.dafault,
+    paddingHorizontal: spacing.default,
     flex: 1,
     justifyContent: 'space-between',
   },
   permissionContainer: {
     flex: 1,
-    gap: spacing.dafault,
-    padding: spacing.dafault,
+    gap: spacing.default,
+    padding: spacing.default,
     justifyContent: 'center',
     alignItems: 'center',
   },
