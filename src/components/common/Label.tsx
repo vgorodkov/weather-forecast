@@ -11,6 +11,8 @@ interface LabelProps {
   icon?: number;
 }
 
+const ICON_SIZE = 24;
+
 export const Label = ({
   text,
   backgroundColor = 'black',
@@ -34,11 +36,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.small,
     padding: spacing.small,
-
     borderRadius: 24,
   },
   labelIcon: {
-    width: 24,
-    height: 24,
+    width: ICON_SIZE,
+    height: ICON_SIZE,
   },
 });
