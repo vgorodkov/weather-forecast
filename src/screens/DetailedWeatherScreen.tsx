@@ -8,7 +8,7 @@ import { convertToCelsius } from 'utils/convertToCelsius';
 import { spacing } from '@constants/layout';
 
 import { Text } from '@components/common/Text';
-import { GradientWrapper } from '@components/GradientWrapper';
+
 import {
   AdditionalInfo,
   ForecastCard,
@@ -29,26 +29,24 @@ export const DetailedWeatherScreen = ({ route, navigation }: DetailedWeatherScre
   };
 
   return (
-    <GradientWrapper>
-      <View style={styles.container}>
-        <Header cityName={weatherData.cityName} onBackBtnPress={onBackBtnPress} />
-        <View style={styles.currentTemp}>
-          <Text variant={FontVariant.sub_heading}>{convertToCelsius(currentWeatherData.temp)}</Text>
-        </View>
-        <AdditionalInfo
-          humidity={currentWeatherData.humidity}
-          clouds={currentWeatherData.clouds.all}
-          wind={currentWeatherData.wind}
-        />
-        <GraphCanvas weatherData={weatherData} />
-        <Text variant={FontVariant.label_medium}>Today: {currentDate.toDateString()}</Text>
-        <View style={styles.forecastInfoContainer}>
-          {forecast.map((data, index) => (
-            <ForecastCard key={index} date={data.date} temp={data.temp} />
-          ))}
-        </View>
+    <View style={styles.container}>
+      <Header cityName={weatherData.cityName} onBackBtnPress={onBackBtnPress} />
+      <View style={styles.currentTemp}>
+        <Text variant={FontVariant.sub_heading}>{convertToCelsius(currentWeatherData.temp)}</Text>
       </View>
-    </GradientWrapper>
+      <AdditionalInfo
+        humidity={currentWeatherData.humidity}
+        clouds={currentWeatherData.clouds.all}
+        wind={currentWeatherData.wind}
+      />
+      <GraphCanvas weatherData={weatherData} />
+      <Text variant={FontVariant.label_medium}>Today: {currentDate.toDateString()}</Text>
+      <View style={styles.forecastInfoContainer}>
+        {forecast.map((data, index) => (
+          <ForecastCard key={index} date={data.date} temp={data.temp} />
+        ))}
+      </View>
+    </View>
   );
 };
 

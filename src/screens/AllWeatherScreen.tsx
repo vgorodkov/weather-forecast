@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@redux/store';
 import { spacing } from '@constants/layout';
 import { FontVariant } from '@constants/font';
-import { GradientWrapper } from '@components/GradientWrapper';
+
 import { Text } from '@components/common/Text';
 import { Button } from '@components/common/Button';
 import { QRScanner } from '@components/QRScanner';
@@ -32,33 +32,23 @@ export const AllWeatherScreen = () => {
 
   if (!permission) {
     // Camera permissions are still loading
-    return (
-      <GradientWrapper>
-        <View />
-      </GradientWrapper>
-    );
+    return <View />;
   }
 
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <GradientWrapper>
-        <View style={styles.permissionContainer}>
-          <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
-            {ASK_PERMISSION_TEXT}
-          </Text>
-          <Button onPress={requestPermission} label={BTN_PERSMISSION_TEXT} />
-        </View>
-      </GradientWrapper>
+      <View style={styles.permissionContainer}>
+        <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
+          {ASK_PERMISSION_TEXT}
+        </Text>
+        <Button onPress={requestPermission} label={BTN_PERSMISSION_TEXT} />
+      </View>
     );
   }
 
   if (isWeatherDummyShown) {
-    return (
-      <GradientWrapper>
-        <NoWeatherDummy openCamera={openCamera} />
-      </GradientWrapper>
-    );
+    return <NoWeatherDummy openCamera={openCamera} />;
   }
 
   if (isCameraOpen) {
@@ -66,12 +56,10 @@ export const AllWeatherScreen = () => {
   }
 
   return (
-    <GradientWrapper>
-      <View style={styles.allWeatherContainer}>
-        <TrackedWeatherList />
-        <Button label={BTN_ADD_WEATHER_TEXT} onPress={openCamera} />
-      </View>
-    </GradientWrapper>
+    <View style={styles.allWeatherContainer}>
+      <TrackedWeatherList />
+      <Button label={BTN_ADD_WEATHER_TEXT} onPress={openCamera} />
+    </View>
   );
 };
 

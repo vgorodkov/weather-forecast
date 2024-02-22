@@ -4,7 +4,7 @@ import React from 'react';
 import { spacing } from '@constants/layout';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MainStackParamList, Route } from '@customTypes/navigation';
-import { GradientWrapper } from '@components/GradientWrapper';
+
 import { Button } from '@components/common/Button';
 import { AppLogo } from '@components/start_screen/AppLogo';
 
@@ -16,12 +16,10 @@ export const StartScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <GradientWrapper>
-      <View style={styles.container}>
-        <AppLogo />
-        <Button label="Get Start" onPress={onGetStartBtnPress} />
-      </View>
-    </GradientWrapper>
+    <View style={styles.container}>
+      <AppLogo />
+      <Button label="Get Start" onPress={onGetStartBtnPress} />
+    </View>
   );
 };
 

@@ -7,7 +7,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
 import { store } from '@redux/store';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import {
   SafeAreaProvider,
   SafeAreaView,
@@ -15,6 +15,7 @@ import {
 } from 'react-native-safe-area-context';
 import { FontFamily } from '@constants/font';
 import { MainStackNav } from '@navigation/MainStackNav';
+import { GradientWrapper } from '@components/GradientWrapper';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,14 +39,24 @@ export default function App() {
     return null;
   }
 
+  const customTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'transparent',
+    },
+  };
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer theme={customTheme}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-            <StatusBar style="auto" />
-            <MainStackNav />
-          </SafeAreaView>
+          <GradientWrapper>
+            <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+              <StatusBar style="auto" />
+              <MainStackNav />
+            </SafeAreaView>
+          </GradientWrapper>
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>
