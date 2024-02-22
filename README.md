@@ -13,10 +13,13 @@ Project is built using React Native and Expo. Weather data is taken from OpenWea
 ## QR-Codes
 
 ![Amster](src/assets/qr/Amster7cnt.svg)
+_Amsterdam QR Code_
 
 ![Rio](src/assets/qr/Rio7cnt.svg)
+_Rio de Janeiro QR Code_
 
 ![Minsk](src/assets/qr/Minsk7cnt.svg)
+_Minsk QR Code_
 
 ## Getting Started
 
