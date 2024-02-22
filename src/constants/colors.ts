@@ -5,6 +5,7 @@ export const colors = {
   light_blue: '#658ED950',
   light_gray: '#33282150',
   blue: '#5E4FC150',
+  pink: '#D86191',
   light_pink: '#D8619150',
   backgroundGradient: {
     start: '#FFFFFF',
