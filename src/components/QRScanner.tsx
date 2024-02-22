@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { MainStackParamList, Route } from '@customTypes/navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -7,7 +7,8 @@ import axios, { AxiosResponse } from 'axios';
 import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { useDispatch } from 'react-redux';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { CustomWeatherData, WeatherResponse } from '@customTypes/weather';
+import { WeatherResponse } from '@customTypes/weather';
+import { mapWeatherData } from 'utils/mapWeatherData';
 
 type AllWeatherScreenProp = NativeStackScreenProps<MainStackParamList, Route.AllWeather>;
 
@@ -38,25 +39,7 @@ export const QRScanner = ({ closeCamera }: { closeCamera: () => void }) => {
       return;
     }
 
-    const weatherData: CustomWeatherData = {
-      cityName: weatherResData?.city.name,
-      countryName: weatherResData?.city.country,
-      lat: weatherResData?.city.coord.lat,
-      lon: weatherResData?.city.coord.lon,
-      main: weatherResData?.list.map((data) => {
-        return {
-          date: data.dt_txt,
-          temp: data.main.temp,
-          temp_feels: data.main.feels_like,
-          temp_max: data.main.temp_max,
-          temp_min: data.main.temp_min,
-          clouds: data.clouds,
-          humidity: data.main.humidity,
-          wind: data.wind.speed,
-          description: data.weather,
-        };
-      }),
-    };
+    const weatherData = mapWeatherData(weatherResData);
 
     navigation.navigate(Route.DetailedWeather, { weatherData });
     dispatch(
