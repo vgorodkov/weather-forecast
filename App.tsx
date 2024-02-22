@@ -1,21 +1,20 @@
 import 'react-native-gesture-handler';
 
+import { useCallback } from 'react';
+import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { FontFamily } from '@constants/font';
-import { useCallback } from 'react';
-
-import { MainStackNav } from '@navigation/MainStackNav';
-import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { store } from '@redux/store';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   SafeAreaProvider,
   SafeAreaView,
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
+import { FontFamily } from '@constants/font';
+import { MainStackNav } from '@navigation/MainStackNav';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -44,7 +43,7 @@ export default function App() {
       <NavigationContainer>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-            <StatusBar style="auto" backgroundColor="" />
+            <StatusBar style="auto" />
             <MainStackNav />
           </SafeAreaView>
         </SafeAreaProvider>
