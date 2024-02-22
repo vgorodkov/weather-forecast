@@ -11,7 +11,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { FontFamily } from '@constants/font';
 import { MainStackNav } from '@navigation/MainStackNav';
-import { GradientWrapper } from '@components/GradientWrapper';
 
 SplashScreen.preventAutoHideAsync();
 
