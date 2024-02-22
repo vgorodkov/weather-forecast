@@ -1,16 +1,19 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 
-import { spacing } from '@constants/layout';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { spacing } from '@constants/layout';
 import { MainStackParamList, Route } from '@customTypes/navigation';
 
 import { Button } from '@components/common/Button';
 import { AppLogo } from '@components/start_screen/AppLogo';
 import { GradientWrapper } from '@components/GradientWrapper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = NativeStackScreenProps<MainStackParamList, Route.Start>;
+
+const START_BUTTON_TEXT = 'Get Start';
 
 export const StartScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
@@ -28,7 +31,7 @@ export const StartScreen = ({ navigation }: Props) => {
         ]}
       >
         <AppLogo />
-        <Button label="Get Start" onPress={onGetStartBtnPress} />
+        <Button label={START_BUTTON_TEXT} onPress={onGetStartBtnPress} />
       </View>
     </GradientWrapper>
   );
@@ -37,8 +40,7 @@ export const StartScreen = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: spacing.dafault,
-
+    paddingHorizontal: spacing.default,
     justifyContent: 'space-between',
   },
 });
