@@ -4,3 +4,9 @@ export const spacing = {
   medium: 24,
   large: 32,
 };
+
+export const sizes = {
+  canvas: {
+    height: 240,
+  },
+};
