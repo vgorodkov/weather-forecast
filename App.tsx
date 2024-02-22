@@ -1,18 +1,14 @@
 import 'react-native-gesture-handler';
 
 import { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
 import { store } from '@redux/store';
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-  initialWindowMetrics,
-} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { FontFamily } from '@constants/font';
 import { MainStackNav } from '@navigation/MainStackNav';
 import { GradientWrapper } from '@components/GradientWrapper';
@@ -39,24 +35,14 @@ export default function App() {
     return null;
   }
 
-  const customTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: 'transparent',
-    },
-  };
-
   return (
     <Provider store={store}>
-      <NavigationContainer theme={customTheme}>
+      <NavigationContainer>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <GradientWrapper>
-            <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-              <StatusBar style="auto" />
-              <MainStackNav />
-            </SafeAreaView>
-          </GradientWrapper>
+          <View onLayout={onLayoutRootView} style={styles.container}>
+            <StatusBar style="auto" />
+            <MainStackNav />
+          </View>
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>

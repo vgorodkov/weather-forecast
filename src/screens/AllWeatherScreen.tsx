@@ -10,6 +10,8 @@ import { Text } from '@components/common/Text';
 import { Button } from '@components/common/Button';
 import { QRScanner } from '@components/QRScanner';
 import { TrackedWeatherList, NoWeatherDummy } from '@components/all_weather_screen';
+import { GradientWrapper } from '@components/GradientWrapper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ASK_PERMISSION_TEXT = 'We need your permission to show the camera';
 const BTN_PERSMISSION_TEXT = 'Grant permission';
@@ -19,6 +21,7 @@ export const AllWeatherScreen = () => {
   const trackedWeather = useSelector((state: RootState) => state.weather.trackedWeather);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const isWeatherDummyShown = trackedWeather.length <= 0 && !isCameraOpen;
 
@@ -38,17 +41,23 @@ export const AllWeatherScreen = () => {
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <View style={styles.permissionContainer}>
-        <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
-          {ASK_PERMISSION_TEXT}
-        </Text>
-        <Button onPress={requestPermission} label={BTN_PERSMISSION_TEXT} />
-      </View>
+      <GradientWrapper>
+        <View style={styles.permissionContainer}>
+          <Text variant={FontVariant.body_sb} style={{ textAlign: 'center' }}>
+            {ASK_PERMISSION_TEXT}
+          </Text>
+          <Button onPress={requestPermission} label={BTN_PERSMISSION_TEXT} />
+        </View>
+      </GradientWrapper>
     );
   }
 
   if (isWeatherDummyShown) {
-    return <NoWeatherDummy openCamera={openCamera} />;
+    return (
+      <GradientWrapper>
+        <NoWeatherDummy openCamera={openCamera} />
+      </GradientWrapper>
+    );
   }
 
   if (isCameraOpen) {
@@ -56,10 +65,20 @@ export const AllWeatherScreen = () => {
   }
 
   return (
-    <View style={styles.allWeatherContainer}>
-      <TrackedWeatherList />
-      <Button label={BTN_ADD_WEATHER_TEXT} onPress={openCamera} />
-    </View>
+    <GradientWrapper>
+      <View
+        style={[
+          styles.allWeatherContainer,
+          {
+            paddingTop: insets.top + spacing.dafault,
+            paddingBottom: insets.bottom + spacing.dafault,
+          },
+        ]}
+      >
+        <TrackedWeatherList />
+        <Button label={BTN_ADD_WEATHER_TEXT} onPress={openCamera} />
+      </View>
+    </GradientWrapper>
   );
 };
 
